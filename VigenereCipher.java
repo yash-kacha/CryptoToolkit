@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class VigenereCipher {
-
+public class VigenereCipher1 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter text : ");
         String s = sc.nextLine();
-        s=s.toUpperCase();
 
         System.out.print("Enter key : ");
         String key = sc.nextLine();
-        key=key.toUpperCase();
 
         System.out.print("0 : encryption  ::  1 : decryption    ::");
         int c = sc.nextInt();
@@ -27,7 +24,7 @@ public class VigenereCipher {
         List<Character> all = new ArrayList<>();
         List<Character> copy = new ArrayList<>();
         int c = 0;
-        for (char i = 'A'; i <= 'Z'; i++) {
+        for (char i = 32; i <= 126; i++) {
             all.add(i);
             copy.add(i);
             c++;
@@ -38,17 +35,18 @@ public class VigenereCipher {
             copy.remove(temp);
             copy.add(0, temp);
         }
+        System.out.println(copy.toString());
 
-        char[][] table = new char[27][27];
+        char[][] table = new char[96][96];
 
-        for (int i = 1; i < 27; i++) {
+        for (int i = 1; i < 96; i++) {
             table[0][i] = all.get(i - 1);
             table[i][0] = all.get(i - 1);
         }
 
         table[0][0] = '0';
-        for (int i = 1; i < 27; i++) {
-            for (int j = 1; j < 27; j++) {
+        for (int i = 1; i < 96; i++) {
+            for (int j = 1; j < 96; j++) {
                 table[i][j] = copy.get(j - 1);
             }
             copy.addLast(copy.get(0));
@@ -57,15 +55,12 @@ public class VigenereCipher {
 
         return table;
     }
-
     public static String enc(String s, String key) {
-
         char[] keys = key.toCharArray();
         char[][] table = Table(key);
         char[] keyStr = new char[s.length()];
-
         int c = 0;
-
+        
         for (int i = 0; i < s.length(); i++) {
 
             keyStr[i] = keys[c];
@@ -77,16 +72,14 @@ public class VigenereCipher {
         String l = "";
 
         for (int i = 0; i < s.length(); i++) {
-            int x = keyStr[i] - 64;
-            int y = s.charAt(i) - 64;
-
+            int x = keyStr[i] - 31;
+            int y = s.charAt(i) - 31;
             l += table[x][y];
         }
         return l;
     }
 
     public static String dec(String s, String key) {
-
         char[] keys = key.toCharArray();
         char[][] table = Table(key);
         char[] keyStr = new char[s.length()];
@@ -103,9 +96,9 @@ public class VigenereCipher {
         }
         String l = "";
         for (int i = 0; i < s.length(); i++) {
-            int x = keyStr[i] - 64;
+            int x = keyStr[i] - 31;
             int y=1;
-            for(;y<27;y++)
+            for(;y<96;y++)
             {
                 if(table[x][y]==s.charAt(i))
                 {
