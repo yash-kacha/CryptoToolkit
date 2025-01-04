@@ -35,7 +35,6 @@ public class VigenereCipher1 {
             copy.remove(temp);
             copy.add(0, temp);
         }
-        System.out.println(copy.toString());
 
         char[][] table = new char[96][96];
 
