@@ -3,7 +3,7 @@ import java.io.*;
 import java.security.SecureRandom;
 import java.util.Scanner;
 
-public class testjpeg {
+public class CipherJPEG {
 
     private static SecretKey generateKey(String keyString) throws Exception {
         byte[] keyBytes = keyString.getBytes();
