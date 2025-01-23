@@ -49,7 +49,7 @@ public class rawAsciiEncrpt1 {
                 tt/=2;
             }
     
-            ans1+=ans+" ";
+            ans1+=ans;
         }
         return ans1;
     }
@@ -62,18 +62,17 @@ public class rawAsciiEncrpt1 {
 
 
        int l = s.length();
-        int i=0,start=0,temp;
+        int i=1,start=0,temp;
         String op="";
         while(i<l)
         {
-            
-            if(s.charAt(i)==' ')
+            if(i%8==0)
             {
                 String sub = s.substring(start, (i));
                 temp =Integer.parseInt(sub);
 
                 op+=(char)(b2d(temp));
-                start=i+1;
+                start=i; 
             }
             else if(i==(l-1))
             {
@@ -81,8 +80,26 @@ public class rawAsciiEncrpt1 {
                 temp =Integer.parseInt(sub);
 
                 op+=(char)(b2d(temp));
-                start=i+1;
+                start=i;
             }
+
+
+            // if(s.charAt(i)==' ')
+            // {
+            //     String sub = s.substring(start, (i));
+            //     temp =Integer.parseInt(sub);
+
+            //     op+=(char)(b2d(temp));
+            //     start=i+1;
+            // }
+            // else if(i==(l-1))
+            // {
+            //     String sub = s.substring(start, (i+1));
+            //     temp =Integer.parseInt(sub);
+
+            //     op+=(char)(b2d(temp));
+            //     start=i+1;
+            // }
             i++;
         }
         return op;
